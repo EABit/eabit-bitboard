@@ -1,0 +1,25 @@
+# Define a versão da sintaxe do Docker Compose
+version: '3.8'
+
+# Define o nome do projeto para evitar conflitos de nomes de containers
+name: 'bitboard'
+
+services:
+  # Serviço do Banco de Dados PostgreSQL
+  postgres-db:
+    image: bitnami/postgresql
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      # Mapeia os dados para um volume nomeado para persistência
+      - postgres_data:/bitnami/postgresql
+    restart: unless-stopped
+
+# Define os volumes que serão gerenciados pelo Docker
+volumes:
+  postgres_data:
+    name: bitboard-pg-data
