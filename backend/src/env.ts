@@ -20,6 +20,8 @@ const envSchema = z.object({
   POSTGRES_URL: z.url(
     'A URL de conexão com o PostgreSQL deve ser válida e completa.'
   ),
+
+  CORS_ORIGIN: z.url('A URL de CORS ORIGIN deve ser válida e completa.'),
 });
 
 // Valida as variáveis de ambiente usando safeParse para um controle de erro mais elegante.

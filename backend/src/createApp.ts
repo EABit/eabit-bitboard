@@ -1,7 +1,4 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { fastifyCors } from '@fastify/cors';
-import fastifyStatic from '@fastify/static';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
 import { fastify } from 'fastify';
@@ -11,27 +8,35 @@ import {
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod';
+import { env } from './env.ts';
 import { routes } from './routes/routes.ts';
 
 export function createApp() {
+  const isProduction = env.NODE_ENV === 'production';
+
   const app = fastify({
-    logger: {
-      transport: {
-        target: 'pino-pretty',
-        options: {
-          colorize: true,
-          translateTime: 'SYS:yyyy-mm-dd HH:MM:ss.l',
-          ignore: 'pid, hostname',
+    logger: isProduction
+      ? true // Logger JSON padrão em produção
+      : {
+          // Pino Pretty em desenvolvimento
+          transport: {
+            target: 'pino-pretty',
+            options: {
+              colorize: true,
+              translateTime: 'SYS:yyyy-mm-dd HH:MM:ss.l',
+              ignore: 'pid, hostname',
+            },
+          },
         },
-      },
-    },
   }).withTypeProvider<ZodTypeProvider>();
 
   app.setSerializerCompiler(serializerCompiler);
   app.setValidatorCompiler(validatorCompiler);
 
   app.register(fastifyCors, {
-    origin: true,
+    // Em produção, permite apenas a origem definida na variável de ambiente.
+    // Em desenvolvimento, pode ser mais permissivo.
+    origin: isProduction ? env.CORS_ORIGIN : '*',
   });
 
   app.register(fastifySwagger, {
@@ -47,21 +52,6 @@ export function createApp() {
 
   app.register(fastifySwaggerUi, {
     routePrefix: '/docs',
-  });
-
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
-
-  app.register(fastifyStatic, {
-    root: path.join(process.cwd(), 'public'),
-    prefix: '/',
-    decorateReply: false, // evita colisões com outros handlers
-    setHeaders(res, filePath) {
-      // permitir apenas imagens e ícones
-      if (!/\.(png|jpg|jpeg|gif|svg|ico)$/i.test(filePath)) {
-        res.statusCode = 403;
-      }
-    },
   });
 
   for (const route of routes) {
