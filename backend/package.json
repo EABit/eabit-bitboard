@@ -1,28 +1,19 @@
 {
-  "name": "@eabit/bitboard-backend",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "API RESTful do projeto open source BitBoard, construída com Fastify, Drizzle e PostgreSQL.",
-  "main": "dist/server.js",
-  "engines": {
-    "node": "22.x"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "tsx --watch --env-file .env src/server.ts",
+    "dev": "tsx watch --env-file=.env src/server.ts",
     "build": "tsc",
-    "start": "node --env-file .env dist/server.js",
-    "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio",
-    "db:seed": "tsx src/db/drizzle/seed.ts"
+    "start": "node dist/server.js",
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:studio": "npx drizzle-kit studio"
   },
-  "keywords": [
-    "fastify",
-    "drizzle",
-    "nodejs",
-    "typescript",
-    "eabit"
-  ],
-  "author": "EABit Software <opensource@eabit.com.br>",
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "type": "module",
   "devDependencies": {
     "@biomejs/biome": "^2.2.4",

@@ -18,7 +18,7 @@ export const getHealthRoute: FastifyPluginAsyncZod = async app => {
       },
     },
     async (_request, reply) => {
-      return reply.status(200).send({ message: 'BitBoard API is online...' });
+      return reply.status(200).send({ message: 'BitBoard is online...' });
     }
   );
 };
