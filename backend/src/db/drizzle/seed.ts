@@ -4,11 +4,18 @@ import { schema } from './schema/index.ts';
 
 await reset(db, schema);
 
-await db.insert(schema.messages).values({
-  content:
-    'teakdja aklfj a afdkl adsklf na fadklfjadfka afds as akls jfadk ja akljfadsf',
-  authorName: 'John Doe',
-});
+await db.insert(schema.messages).values([
+  {
+    content:
+      'Bem-vindo ao BitBoard! Este é o primeiro recado. Qual a sua sugestão para a próxima funcionalidade?',
+    authorName: 'Roberto Zanin',
+  },
+  {
+    content:
+      'Estou pensando em começarmos a documentação da API com Swagger. O que vocês acham?',
+    authorName: 'Aline Cristina',
+  },
+]);
 
 await pg.end();
 
