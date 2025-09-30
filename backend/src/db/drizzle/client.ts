@@ -1,11 +1,9 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import { env } from '../../env.ts';
-import { messages } from './schema/messages.ts';
+import * as schema from './schema/schema.ts'; // A importação correta
 
-export const pg = postgres(env.POSTGRES_URL);
+export const queryClient = postgres(env.POSTGRES_URL);
 
-export const db = drizzle(pg, {
-  schema: { messages },
-  casing: 'snake_case',
-});
+// O objeto 'schema' completo deve ser passado aqui
+export const db = drizzle(queryClient, { schema });

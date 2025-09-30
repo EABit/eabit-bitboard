@@ -14,7 +14,7 @@ export const getMessagesRoute: FastifyPluginAsyncZod = async app => {
         operationId: 'getMessages',
         response: {
           200: z.object({
-            messagesList: z.array(
+            messages: z.array(
               z.object({
                 id: z.string(),
                 content: z.string(),
@@ -35,9 +35,9 @@ export const getMessagesRoute: FastifyPluginAsyncZod = async app => {
       },
     },
     async (_request, reply) => {
-      const { messagesList } = await getMessages();
+      const { messages } = await getMessages();
 
-      return reply.status(200).send({ messagesList });
+      return reply.status(200).send({ messages });
     }
   );
 };
