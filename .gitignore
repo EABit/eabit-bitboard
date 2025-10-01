@@ -1,0 +1,69 @@
+# ===================================================================
+# Arquivo .gitignore para projetos Node.js & Next.js - EABit Software
+# ===================================================================
+
+# 1. Dependências e Módulos
+# A pasta node_modules contém todas as dependências instaladas e nunca deve ser versionada.
+node_modules/
+
+# 2. Logs e Arquivos de Debug
+# Arquivos de log podem conter informações sensíveis e variam entre ambientes.
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 3. Build de Produção e Cache
+# Pastas geradas pelo processo de build e compilação.
+# Next.js
+.next/
+out/
+
+# TypeScript
+dist/
+build/
+.tsbuildinfo
+
+# 4. Variáveis de Ambiente e Segredos
+# NUNCA versione arquivos .env. Eles contêm segredos e chaves de API.
+# O arquivo .env.example DEVE ser versionado como um guia.
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Next.js specific
+.env.local
+.env.development.local
+.env.production.local
+
+# 5. Arquivos de Sistema Operacional
+# Arquivos gerados por macOS, Windows e Linux.
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 6. Arquivos de Editores e IDEs
+# Configurações específicas de ambiente de desenvolvimento.
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 7. Arquivos de Teste e Cobertura de Código
+# Relatórios e caches gerados por ferramentas de teste.
+coverage/
+.nyc_output/
+
+# 8. Arquivos de Deploy
+# Pastas específicas de plataformas de deploy.
+.vercel/
+.netlify/

@@ -1,0 +1,22 @@
+# Define o nome do projeto para evitar conflitos de nomes de containers
+name: 'bitboard'
+
+services:
+  # Serviço do Banco de Dados PostgreSQL
+  postgres-db:
+    image: postgres:16.9-alpine
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_USER=bitboard
+      - POSTGRES_PASSWORD=bitboard
+      - POSTGRES_DB=bitboard
+    volumes:
+      # Mapeia os dados para um volume nomeado para persistência
+      - postgres_data:/postgres/alpine
+    restart: unless-stopped
+
+# Define os volumes que serão gerenciados pelo Docker
+volumes:
+  postgres_data:
+    name: bitboard-pg-data
