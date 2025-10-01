@@ -1,9 +1,8 @@
 import { MessageCard } from '@/components/MessageCard';
+import { NewMessageForm } from '@/components/NewMessageForm'; // 1. Importa o formulário
 import { getMessages } from '@/lib/api';
 
-// Esta página é um Server Component, por isso podemos torná-la 'async'
 export default async function HomePage() {
-  // A busca de dados acontece no servidor antes de a página ser enviada ao cliente
   const messages = await getMessages();
 
   return (
@@ -17,19 +16,15 @@ export default async function HomePage() {
         </p>
       </header>
 
-      {/* TODO: Implementar o formulário para criar um novo recado */}
-      <div className='mb-10 rounded-lg bg-gray-50 p-4 text-center text-gray-400'>
-        Aqui ficará o formulário de novo recado.
-      </div>
+      {/* 2. Renderiza o componente do formulário */}
+      <NewMessageForm />
 
-      <section className='space-y-6'>
-        {/* Renderização condicional: exibe uma mensagem se não houver recados */}
+      <section className='mt-12 space-y-6'>
         {messages.length === 0 ? (
           <p className='text-center text-gray-500'>
             Ainda não há recados. Seja o primeiro a postar!
           </p>
         ) : (
-          // Mapeia a lista de recados e renderiza um Card para cada um
           messages.map(message => (
             <MessageCard key={message.id} message={message} />
           ))
