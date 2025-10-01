@@ -7,7 +7,7 @@ export const getMessagesRoute: FastifyPluginAsyncZod = async app => {
     '/messages',
     {
       schema: {
-        summary: 'Listar todos os recados', // CORRIGIDO
+        summary: 'Lista todos os recados',
         description:
           'Retorna uma lista de todos os recados principais. Para facilitar a exibição no frontend, cada objeto de recado já virá com um array aninhado de suas respectivas respostas.',
         tags: ['Messages'],
