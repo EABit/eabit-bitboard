@@ -27,7 +27,7 @@ async function seed() {
     .values({
       content:
         'Estou pensando em começarmos a documentação da API com Swagger. O que vocês acham?',
-      authorName: 'Aline Cristina',
+      authorName: 'John Doe',
     })
     .returning();
 
@@ -46,21 +46,21 @@ async function seed() {
   await db.insert(schema.replies).values({
     content:
       'Acho que a funcionalidade de autenticação de usuários seria a mais importante agora!',
-    authorName: 'Aline Cristina',
+    authorName: 'John Doe',
     messageId: message1[0].id,
   });
 
   await db.insert(schema.replies).values({
     content:
-      'Concordo com a Aline. Autenticação é essencial para os próximos passos.',
-    authorName: 'John Doe',
+      'Concordo com o John. Autenticação é essencial para os próximos passos.',
+    authorName: 'Roberto Zanin',
     messageId: message1[0].id,
   });
 
   await db.insert(schema.replies).values({
     content:
       'Ótima ideia! A documentação vai facilitar muito a vida de novos contribuidores.',
-    authorName: 'John Doe',
+    authorName: 'Roberto Zanin',
     messageId: message2[0].id,
   });
 

@@ -34,7 +34,9 @@ export function createApp() {
   app.setValidatorCompiler(validatorCompiler);
 
   app.register(fastifyCors, {
-    origin: env.CORS_ORIGIN, // Continua lendo do .env
+    // Em produção, permite apenas a origem definida na variável de ambiente.
+    // Em desenvolvimento, pode ser mais permissivo.
+    origin: isProduction ? env.CORS_ORIGIN : '*',
 
     // Adiciona a lista explícita de métodos permitidos
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
